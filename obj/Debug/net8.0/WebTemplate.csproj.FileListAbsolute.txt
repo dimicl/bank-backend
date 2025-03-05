@@ -294,3 +294,9 @@ C:\Users\dimic\Downloads\BankingProject\mbanking\bin\Debug\net8.0\Release\WebTem
 C:\Users\dimic\Downloads\BankingProject\mbanking\bin\Debug\net8.0\Release\WebTemplate.runtimeconfig.json
 C:\Users\dimic\Downloads\BankingProject\mbanking\bin\Debug\net8.0\Release\WebTemplate.staticwebassets.endpoints.json
 C:\Users\dimic\Downloads\BankingProject\mbanking\bin\Debug\net8.0\WebTemplate.staticwebassets.runtime.json
+C:\Users\dimic\Downloads\BankingProject\mbanking\bin\Debug\net8.0\Release\Release\web.config
+C:\Users\dimic\Downloads\BankingProject\mbanking\bin\Debug\net8.0\Release\Release\appsettings.Development.json
+C:\Users\dimic\Downloads\BankingProject\mbanking\bin\Debug\net8.0\Release\Release\appsettings.json
+C:\Users\dimic\Downloads\BankingProject\mbanking\bin\Debug\net8.0\Release\Release\WebTemplate.deps.json
+C:\Users\dimic\Downloads\BankingProject\mbanking\bin\Debug\net8.0\Release\Release\WebTemplate.runtimeconfig.json
+C:\Users\dimic\Downloads\BankingProject\mbanking\bin\Debug\net8.0\Release\Release\WebTemplate.staticwebassets.endpoints.json

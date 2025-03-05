@@ -12,7 +12,7 @@ builder.Services.AddCors(options =>
         policy.AllowAnyHeader()
               .AllowAnyMethod()
               .AllowCredentials()
-              .WithOrigins("http://localhost:4209", "https://akulbank.netlify.app");
+              .WithOrigins("http://localhost:4209", "https://akulbank.netlify.app", "https://banka-l2g6.onrender.com");
     });
 });
 
