@@ -12,9 +12,8 @@ builder.Services.AddCors(options =>
         policy.AllowAnyHeader()
               .AllowAnyMethod()
               .AllowCredentials()
-              .WithOrigins("http://localhost:4209", "https://akulbank.netlify.app", "https://akulbank.onrender.com")
-              .AllowAnyOrigin(); // Omogućava pristup sa bilo kojeg domena, ali za produkciju ograničite na specifične domene
-    });
+              .WithOrigins("http://localhost:4209", "https://akulbank.netlify.app", "https://akulbank.onrender.com");
+    }); 
 });
 
 builder.WebHost.UseUrls("http://*:8080");
