@@ -12,7 +12,7 @@ builder.Services.AddCors(options =>
         policy.AllowAnyHeader()
               .AllowAnyMethod()
               .AllowCredentials()
-              .WithOrigins("http://localhost:4209", "https://akulbank.netlify.app", "https://akulbank.onrender.com");
+              .WithOrigins("http://localhost:4209", "https://akulbank.netlify.app", "https://akulbank.onrender.com", "http://localhost:8080");
     }); 
 });
 
@@ -33,7 +33,8 @@ if (app.Environment.IsDevelopment() || app.Environment.IsProduction())
     
     app.UseSwaggerUI(options =>
     {
-        options.SwaggerEndpoint("https://akulbank.onrender.com/swagger/v1/swagger.json", "Banka API v1");
+        // Postavi Swagger endpoint za lokalni razvoj ili Render
+        options.SwaggerEndpoint(app.Environment.IsDevelopment() ? "/swagger/v1/swagger.json" : "https://akulbank.onrender.com/swagger/v1/swagger.json", "Banka API v1");
         options.RoutePrefix = "api/docs";
     });
 }
