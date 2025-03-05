@@ -1,0 +1,20 @@
+{
+  "Version": 1,
+  "Hash": "EkRzdkeMA2hNfb1Z3DvBVGn08bL6JWkcwysFqKTwUMk=",
+  "Source": "WebTemplate",
+  "BasePath": "_content/WebTemplate",
+  "Mode": "Default",
+  "ManifestType": "Publish",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [
+    {
+      "Name": "WebTemplate\\wwwroot",
+      "Source": "WebTemplate",
+      "ContentRoot": "C:\\Users\\dimic\\Downloads\\BankingProject\\mbanking\\wwwroot\\",
+      "BasePath": "_content/WebTemplate",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": [],
+  "Endpoints": []
+}
