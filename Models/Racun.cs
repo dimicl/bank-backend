@@ -11,6 +11,9 @@ namespace WebTemplate.Models
         public decimal Sredstva { get; set;}
         public string? Valuta { get; set;}
 
+        [ForeignKey("Korisnik")]
+        public int? KorisnikId { get; set; }
+
         [JsonIgnore]
         public Korisnik? Korisnik { get; set; }
 
