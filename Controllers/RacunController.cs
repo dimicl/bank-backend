@@ -93,7 +93,7 @@ public async Task<ActionResult> transferNovca([FromBody] TransferRequest request
         {
             Iznos = request.Iznos,
             Tip = "Poslato",
-            Datum = DateTime.Now,
+            Datum = DateTime.UtcNow,
             TekuciSender = sender.Racun?.BrojRacuna,
             TekuciReceiver = receiver.Racun?.BrojRacuna,
             Svrha = request.Svrha,
@@ -104,7 +104,7 @@ public async Task<ActionResult> transferNovca([FromBody] TransferRequest request
         {
             Iznos = request.Iznos,
             Tip = "Primljeno",
-            Datum = DateTime.Now,
+            Datum = DateTime.UtcNow,
             TekuciSender = sender.Racun?.BrojRacuna,
             TekuciReceiver = receiver.Racun?.BrojRacuna,
             Svrha = request.Svrha,

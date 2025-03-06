@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("WebTemplate")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+73d78fee8bf42374e9be70dd1bf93fa0046c0b68")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5e3afbd79c950ebb78a232f1131f795ffd17fb67")]
 [assembly: System.Reflection.AssemblyProductAttribute("WebTemplate")]
 [assembly: System.Reflection.AssemblyTitleAttribute("WebTemplate")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
