@@ -56,7 +56,7 @@ namespace WebTemplate.Migrations
 
                     b.HasIndex("RacunId1");
 
-                    b.ToTable("Korisnici");
+                    b.ToTable("Korisnici", (string)null);
                 });
 
             modelBuilder.Entity("WebTemplate.Models.Racun", b =>
@@ -83,7 +83,7 @@ namespace WebTemplate.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Racuni");
+                    b.ToTable("Racuni", (string)null);
                 });
 
             modelBuilder.Entity("WebTemplate.Models.Stednja", b =>
@@ -111,7 +111,7 @@ namespace WebTemplate.Migrations
 
                     b.HasIndex("KorisnikId");
 
-                    b.ToTable("Stednje");
+                    b.ToTable("Stednje", (string)null);
                 });
 
             modelBuilder.Entity("WebTemplate.Models.Transakcija", b =>
@@ -151,7 +151,7 @@ namespace WebTemplate.Migrations
 
                     b.HasIndex("RacunId");
 
-                    b.ToTable("Transakcije");
+                    b.ToTable("Transakcije", (string)null);
                 });
 
             modelBuilder.Entity("WebTemplate.Models.Korisnik", b =>

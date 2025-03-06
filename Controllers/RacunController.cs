@@ -61,7 +61,8 @@ public class RacunController : ControllerBase
         }
         catch (Exception e)
         {
-            return BadRequest("Greska " + e.Message);
+             var innerExceptionMessage = e.InnerException?.Message ?? "No inner exception.";
+            return BadRequest($"Greska: {e.Message}, Inner Exception: {innerExceptionMessage}");
         }
     }
 

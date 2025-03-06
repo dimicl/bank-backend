@@ -38,7 +38,7 @@ public class KorisnikController : ControllerBase
             if(c.Racun != null){
                 Context.Racuni.Add(c.Racun);
                 await Context.SaveChangesAsync();
-                c.RacunId = c.Racun.Id;
+                
             }
 
             await Context.Korisnici.AddAsync(c);
