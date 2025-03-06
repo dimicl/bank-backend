@@ -18,6 +18,13 @@ public class BankaContext : DbContext
             .WithOne(r => r.Korisnik)
             .HasForeignKey<Korisnik>(k => k.RacunId)
             .OnDelete(DeleteBehavior.Cascade);
+
+        modelBuilder.Entity<Racun>()
+        .HasMany(r => r.Transakcije)
+        .WithOne(t => t.Racun)
+        .HasForeignKey(t => t.RacunId)
+        .OnDelete(DeleteBehavior.Cascade);
     }
 
+    
 }

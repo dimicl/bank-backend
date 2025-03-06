@@ -9,7 +9,7 @@ namespace WebTemplate.Models
 
         public required decimal Iznos { get; set; }
 
-        public required DateTime Datum { get; set; } = DateTime.UtcNow;
+        public required DateTime Datum { get; set; }
 
         public required string Tip   { get; set; } 
 
