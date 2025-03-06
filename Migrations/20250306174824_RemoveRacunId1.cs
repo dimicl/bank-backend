@@ -5,7 +5,7 @@
 namespace WebTemplate.Migrations
 {
     /// <inheritdoc />
-    public partial class m10 : Migration
+    public partial class RemoveRacunId1 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

@@ -17,7 +17,7 @@ public class StednjaController : ControllerBase
     {
         try
         {
-            var user = await Context.Korisnici.Include(k=>k.Stednje).FirstOrDefaultAsync(s=> s.pin == request.Pin);
+            var user = await Context.Korisnici.Include(k=>k.Stednje).FirstOrDefaultAsync(s=> s.Pin == request.Pin);
             if(user == null)
                 return BadRequest("Korisnik ne postoji");
             
@@ -47,7 +47,7 @@ public class StednjaController : ControllerBase
     {
         try
         {
-            var user = await Context.Korisnici.Include(k=>k.Stednje).FirstOrDefaultAsync(s=>s.pin == request.Pin);
+            var user = await Context.Korisnici.Include(k=>k.Stednje).FirstOrDefaultAsync(s=>s.Pin == request.Pin);
             if(user == null)
                 return BadRequest("Korisnik ne postoji");
             
@@ -66,7 +66,7 @@ public class StednjaController : ControllerBase
     {
         try
         {
-            var user = await Context.Korisnici.Include(r=>r.Racun).Include(s=>s.Stednje).FirstOrDefaultAsync(s=>s.pin == request.Pin);
+            var user = await Context.Korisnici.Include(r=>r.Racun).Include(s=>s.Stednje).FirstOrDefaultAsync(s=>s.Pin == request.Pin);
             if(user == null)
                 return BadRequest("Korisnik ne postoji");
             
@@ -77,10 +77,10 @@ public class StednjaController : ControllerBase
             if(user.Racun == null)
                 return BadRequest("Racun ne postoji");
 
-            if(user.Racun.sredstva < request.Iznos)
+            if(user.Racun.Sredstva < request.Iznos)
                 return BadRequest("Nemate dovoljno sredstva na racunu");
 
-            user.Racun.sredstva -= request.Iznos;
+            user.Racun.Sredstva -= request.Iznos;
             Context.Racuni.Update(user.Racun);
             await Context.SaveChangesAsync();
 
@@ -103,7 +103,7 @@ public class StednjaController : ControllerBase
     {
         try
         {
-            var user = await Context.Korisnici.Include(r=>r.Racun).Include(s=>s.Stednje).FirstOrDefaultAsync(k=>k.pin == request.Pin);
+            var user = await Context.Korisnici.Include(r=>r.Racun).Include(s=>s.Stednje).FirstOrDefaultAsync(k=>k.Pin == request.Pin);
             if(user == null)
                 return BadRequest("Korisnik ne postoji");
 
@@ -111,12 +111,12 @@ public class StednjaController : ControllerBase
             if(racun == null)
                 return BadRequest("Racun ne postoji");
 
-            var stednja = user.Stednje?.FirstOrDefault(s=>s.Naziv == request.Naziv);
+            var stednja = user.Stednje.FirstOrDefault(s=>s.Naziv == request.Naziv);
             if(stednja == null)
                 return BadRequest("Stednja ne postoji");
 
             
-            racun.sredstva += stednja.Vrednost;
+            racun.Sredstva += stednja.Vrednost;
             Context.Racuni.Update(racun);
             await Context.SaveChangesAsync();
 

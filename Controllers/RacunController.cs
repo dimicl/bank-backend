@@ -17,11 +17,11 @@ public class RacunController : ControllerBase
     {
         try
         {
-            var k = await Context.Korisnici.Include(k=>k.Racun).FirstOrDefaultAsync(r=>r.pin == request.Pin);
+            var k = await Context.Korisnici.Include(k=>k.Racun).FirstOrDefaultAsync(r=>r.Pin == request.Pin);
             if(k == null)
                 return BadRequest("Racun ne postoji.");
             
-            return Ok(new { k.Racun?.sredstva });
+            return Ok(new { k.Racun?.Sredstva });
 
         }
         catch (Exception e)
@@ -37,7 +37,7 @@ public class RacunController : ControllerBase
     {
         try
         {
-            var user = await Context.Korisnici.Include(k=>k.Racun).FirstOrDefaultAsync(r=>r.pin == request.Pin);
+            var user = await Context.Korisnici.Include(k=>k.Racun).FirstOrDefaultAsync(r=>r.Pin == request.Pin);
             if(user ==  null)
                 return BadRequest("User ne postoji.");
             
@@ -45,13 +45,13 @@ public class RacunController : ControllerBase
                 return BadRequest("Iznos mora biti validan");
 
             if(user.Racun != null)
-                user.Racun.sredstva = (user.Racun.sredstva) + request.Iznos;
+                user.Racun.Sredstva = (user.Racun.Sredstva) + request.Iznos;
 
             var transakcija = new Transakcija
             {
-                iznos = request.Iznos,
-                tip = "Uplata",
-                datum = DateTime.Now,
+                Iznos = request.Iznos,
+                Tip = "Uplata",
+                Datum = DateTime.Now,
                 Racun = user.Racun
             };
             
@@ -74,15 +74,15 @@ public async Task<ActionResult> transferNovca([FromBody] TransferRequest request
     try
     {
         var sender = await Context.Korisnici.Include(k => k.Racun).ThenInclude(r => r.Transakcije)
-            .FirstOrDefaultAsync(r => r.Racun.brojRacuna == request.SenderAccount);
+            .FirstOrDefaultAsync(r => r.Racun.BrojRacuna == request.SenderAccount);
         
         var receiver = await Context.Korisnici.Include(k => k.Racun).ThenInclude(r => r.Transakcije)
-            .FirstOrDefaultAsync(r => r.Racun.brojRacuna == request.ReceiverAccount);
+            .FirstOrDefaultAsync(r => r.Racun.BrojRacuna == request.ReceiverAccount);
 
         if (sender == null || receiver == null)
             return BadRequest("Greska, ne postoji.");
 
-        if (sender.Racun?.sredstva <= 0 || sender.Racun?.sredstva < request.Iznos)
+        if (sender.Racun?.Sredstva <= 0 || sender.Racun?.Sredstva < request.Iznos)
             return BadRequest("Nemate dovoljno sredstava za transfer");
 
         if (sender.Racun?.Transakcije == null)
@@ -91,16 +91,16 @@ public async Task<ActionResult> transferNovca([FromBody] TransferRequest request
         if (receiver.Racun?.Transakcije == null)
             receiver.Racun.Transakcije = new List<Transakcija>();
 
-        sender.Racun.sredstva -= request.Iznos;
-        receiver.Racun.sredstva += request.Iznos;
+        sender.Racun.Sredstva -= request.Iznos;
+        receiver.Racun.Sredstva += request.Iznos;
 
         var transakcijaSender = new Transakcija
         {
-            iznos = request.Iznos,
-            tip = "Poslato",
-            datum = DateTime.Now,
-            TekuciSender = sender.Racun?.brojRacuna,
-            TekuciReceiver = receiver.Racun?.brojRacuna,
+            Iznos = request.Iznos,
+            Tip = "Poslato",
+            Datum = DateTime.Now,
+            TekuciSender = sender.Racun?.BrojRacuna,
+            TekuciReceiver = receiver.Racun?.BrojRacuna,
             Svrha = request.Svrha,
             Racun = sender.Racun 
         };
@@ -109,11 +109,11 @@ public async Task<ActionResult> transferNovca([FromBody] TransferRequest request
 
         var transakcijaReceiver = new Transakcija
         {
-            iznos = request.Iznos,
-            tip = "Primljeno",
-            datum = DateTime.Now,
-            TekuciSender = sender.Racun?.brojRacuna,
-            TekuciReceiver = receiver.Racun?.brojRacuna,
+            Iznos = request.Iznos,
+            Tip = "Primljeno",
+            Datum = DateTime.Now,
+            TekuciSender = sender.Racun?.BrojRacuna,
+            TekuciReceiver = receiver.Racun?.BrojRacuna,
             Svrha = request.Svrha,
             Racun = receiver.Racun 
         };
@@ -145,7 +145,7 @@ public async Task<ActionResult> transferNovca([FromBody] TransferRequest request
     {
         try
         {
-            var receiver = await Context.Korisnici.Include(k=>k.Racun).FirstOrDefaultAsync(l=> l.Racun.brojRacuna == request.tekuciReceiver);
+            var receiver = await Context.Korisnici.Include(k=>k.Racun).FirstOrDefaultAsync(l=> l.Racun.BrojRacuna == request.tekuciReceiver);
 
             if(receiver == null)
                 return BadRequest("Korisnik ne postoji.");
@@ -166,7 +166,7 @@ public async Task<ActionResult> transferNovca([FromBody] TransferRequest request
     {
         try
         {
-            var sender = await Context.Korisnici.Include(k=>k.Racun).FirstOrDefaultAsync(l=> l.Racun.brojRacuna == request.tekuciReceiver);
+            var sender = await Context.Korisnici.Include(k=>k.Racun).FirstOrDefaultAsync(l=> l.Racun.BrojRacuna == request.tekuciReceiver);
 
             if(sender == null)
                 return BadRequest("Korisnik ne postoji.");
@@ -189,11 +189,11 @@ public async Task<ActionResult> transferNovca([FromBody] TransferRequest request
         {
             var user = await Context.Korisnici.Include(k=>k.Racun)
                                                     .ThenInclude(r=>r.Transakcije)
-                                                    .FirstOrDefaultAsync(t=> t.pin == request.Pin);
+                                                    .FirstOrDefaultAsync(t=> t.Pin == request.Pin);
             if(user == null)
                 return BadRequest("Racun ne postoji.");
             
-            return Ok(new { message = "Transakacije od " + user.ime,  user.Racun?.Transakcije  });
+            return Ok(new { message = "Transakacije od " + user.Ime,  user.Racun?.Transakcije  });
         }
         catch (Exception e)
         {
@@ -207,25 +207,25 @@ public async Task<ActionResult> transferNovca([FromBody] TransferRequest request
     {
         try
         {
-            var user = await Context.Korisnici.Include(r=>r.Racun).FirstOrDefaultAsync(r=> r.pin == PinProvera);
+            var user = await Context.Korisnici.Include(r=>r.Racun).FirstOrDefaultAsync(r=> r.Pin == PinProvera);
             if(user == null)
                 return BadRequest("Racun ne postoji");
 
-            if(user.Racun?.valuta == valuta)
+            if(user.Racun?.Valuta == valuta)
                 return BadRequest("Racun je vec u toj valuti");
             decimal kurs;
-            if(user.Racun?.valuta == "RSD")
+            if(user.Racun?.Valuta == "RSD")
                 kurs = 0.0085M;
             else
                 kurs = 117.5M;
             
             if(user.Racun == null)
                 return BadRequest("Racun ne postoji.");
-            user.Racun.valuta = valuta;
-            user.Racun.sredstva *= kurs;
+            user.Racun.Valuta = valuta;
+            user.Racun.Sredstva *= kurs;
 
             await Context.SaveChangesAsync();
-            return Ok($"Nova valuta {user.Racun.valuta} , stanje: {user.Racun.sredstva}");
+            return Ok($"Nova valuta {user.Racun.Valuta} , stanje: {user.Racun.Sredstva}");
 
         }
         catch (Exception e)

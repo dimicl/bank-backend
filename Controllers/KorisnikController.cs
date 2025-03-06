@@ -38,7 +38,7 @@ public class KorisnikController : ControllerBase
             if(c.Racun != null){
                 Context.Racuni.Add(c.Racun);
                 await Context.SaveChangesAsync();
-                c.RacunId = c.Racun.id;
+                c.RacunId = c.Racun.Id;
             }
 
             await Context.Korisnici.AddAsync(c);
@@ -58,16 +58,16 @@ public class KorisnikController : ControllerBase
     {
         try
         {
-            var user = await Context.Korisnici.Include(k=>k.Racun).FirstOrDefaultAsync(k=>k.pin == request.Pin);
+            var user = await Context.Korisnici.Include(k=>k.Racun).FirstOrDefaultAsync(k=>k.Pin == request.Pin);
             if(user == null)
                 return BadRequest("Ne postoji korisnik.");
             
             return Ok(new 
             {
-                Ime = user.ime,
-                Prezime = user.prezime,
-                BrojRacuna = user.Racun?.brojRacuna,
-                Stanje = user.Racun?.sredstva
+                Ime = user.Ime,
+                Prezime = user.Prezime,
+                BrojRacuna = user.Racun?.BrojRacuna,
+                Stanje = user.Racun?.Sredstva
             });
         }
         catch (Exception e)
@@ -83,7 +83,7 @@ public class KorisnikController : ControllerBase
     {
         try
         {
-            var user = await Context.Korisnici.Include(k=>k.Racun).FirstOrDefaultAsync(l=>l.pin == request.Pin);
+            var user = await Context.Korisnici.Include(k=>k.Racun).FirstOrDefaultAsync(l=>l.Pin == request.Pin);
             if(user == null)
                 return BadRequest("Korisnik nije pronadjen");
 

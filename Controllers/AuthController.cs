@@ -19,30 +19,30 @@ public class AuthController : ControllerBase
     {
         try
         {
-            if(Context.Korisnici.Any(k=> k.email == request.Email))
+            if(Context.Korisnici.Any(k=> k.Email == request.Email))
                 return BadRequest("Email vec postoji.");
             
             string pinKod = authService.GeneratePin();
             string brojR = authService.GenerateBrojRacuna();
             var racun = new Racun
             {
-                brojRacuna = brojR,
-                sredstva = 0,
-                valuta = "RSD"
+                BrojRacuna = brojR,
+                Sredstva = 0,
+                Valuta = "RSD"
             };
 
             var korisnik = new Korisnik
             {
-                ime = request.Ime,
-                prezime = request.Prezime,
-                email = request.Email,
-                pin = pinKod,
+                Ime = request.Ime,
+                Prezime = request.Prezime,
+                Email = request.Email,
+                Pin = pinKod,
                 Racun = racun
             };
 
             Context.Korisnici.Add(korisnik);
             await Context.SaveChangesAsync();
-            return Ok(new {Message = "Registracija uspesna.", PinKod=pinKod, racun = new { racun.brojRacuna, racun.sredstva, racun.valuta }});
+            return Ok(new {Message = "Registracija uspesna.", PinKod=pinKod, racun = new { racun.BrojRacuna, racun.Sredstva, racun.Valuta }});
             
         }
         catch (Exception e)
@@ -57,11 +57,11 @@ public class AuthController : ControllerBase
     {
         try
         {
-            var korisnik = await Context.Korisnici.Include(k=>k.Racun).FirstOrDefaultAsync(k=> k.pin == request.Pin);
+            var korisnik = await Context.Korisnici.Include(k=>k.Racun).FirstOrDefaultAsync(k=> k.Pin == request.Pin);
             if(korisnik == null)
                 return Unauthorized(new { message = "Pogresan pin" });
             
-            return Ok(new { message  = "Korisnik " + korisnik.ime + " sa pinom " + korisnik.pin + " se uspesno ulogovao", korisnik = new {korisnik.ime, korisnik.prezime, korisnik.pin, korisnik.email} , racun = new { korisnik.Racun?.brojRacuna, korisnik.Racun?.sredstva, korisnik.Racun?.valuta} });
+            return Ok(new { message  = "Korisnik " + korisnik.Ime + " sa pinom " + korisnik.Pin + " se uspesno ulogovao", korisnik = new {korisnik.Ime, korisnik.Prezime, korisnik.Pin, korisnik.Email} , racun = new { korisnik.Racun?.BrojRacuna, korisnik.Racun?.Sredstva, korisnik.Racun?.Valuta} });
         }
         catch (Exception e)
         {

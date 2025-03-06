@@ -143,7 +143,6 @@ C:\Users\dimic\Downloads\WebTemplate\mbanking\obj\Debug\net8.0\WebTemplate.pdb
 C:\Users\dimic\Downloads\WebTemplate\mbanking\obj\Debug\net8.0\WebTemplate.genruntimeconfig.cache
 C:\Users\dimic\Downloads\WebTemplate\mbanking\obj\Debug\net8.0\ref\WebTemplate.dll
 C:\Users\dimic\Downloads\BankingProject\mbanking\bin\Debug\net8.0\appsettings.Development.json
-C:\Users\dimic\Downloads\BankingProject\mbanking\bin\Debug\net8.0\appsettings.json
 C:\Users\dimic\Downloads\BankingProject\mbanking\bin\Debug\net8.0\WebTemplate.staticwebassets.endpoints.json
 C:\Users\dimic\Downloads\BankingProject\mbanking\bin\Debug\net8.0\WebTemplate.exe
 C:\Users\dimic\Downloads\BankingProject\mbanking\bin\Debug\net8.0\WebTemplate.deps.json
@@ -300,3 +299,6 @@ C:\Users\dimic\Downloads\BankingProject\mbanking\bin\Debug\net8.0\Release\Releas
 C:\Users\dimic\Downloads\BankingProject\mbanking\bin\Debug\net8.0\Release\Release\WebTemplate.deps.json
 C:\Users\dimic\Downloads\BankingProject\mbanking\bin\Debug\net8.0\Release\Release\WebTemplate.runtimeconfig.json
 C:\Users\dimic\Downloads\BankingProject\mbanking\bin\Debug\net8.0\Release\Release\WebTemplate.staticwebassets.endpoints.json
+C:\Users\dimic\Downloads\BankingProject\mbanking\bin\Debug\net8.0\Npgsql.dll
+C:\Users\dimic\Downloads\BankingProject\mbanking\bin\Debug\net8.0\Npgsql.EntityFrameworkCore.PostgreSQL.dll
+C:\Users\dimic\Downloads\BankingProject\mbanking\bin\Debug\net8.0\appsettings.json
