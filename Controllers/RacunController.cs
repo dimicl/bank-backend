@@ -52,7 +52,8 @@ public class RacunController : ControllerBase
                 Iznos = request.Iznos,
                 Tip = "Uplata",
                 Datum = DateTime.UtcNow,
-                Racun = user.Racun
+                Racun = user.Racun,
+                RacunId = user.Racun.Id
             };
             
             Context.Transakcije.Add(transakcija);

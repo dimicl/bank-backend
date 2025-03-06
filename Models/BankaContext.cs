@@ -10,5 +10,14 @@ public class BankaContext : DbContext
     {
         
     }
-   
+    
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<Korisnik>()
+            .HasOne(k => k.Racun)
+            .WithOne(r => r.Korisnik)
+            .HasForeignKey<Korisnik>(k => k.RacunId)
+            .OnDelete(DeleteBehavior.Cascade);
+    }
+
 }

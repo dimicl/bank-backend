@@ -12,8 +12,8 @@ using WebTemplate.Models;
 namespace WebTemplate.Migrations
 {
     [DbContext(typeof(BankaContext))]
-    [Migration("20250306174824_RemoveRacunId1")]
-    partial class RemoveRacunId1
+    [Migration("20250306222850_updateKey")]
+    partial class updateKey
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -34,30 +34,29 @@ namespace WebTemplate.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Email")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("Ime")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(20)
+                        .HasColumnType("character varying(20)");
 
                     b.Property<string>("Pin")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(4)
+                        .HasColumnType("character varying(4)");
 
                     b.Property<string>("Prezime")
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<int>("RacunId")
-                        .HasColumnType("integer");
-
-                    b.Property<int?>("RacunId1")
+                    b.Property<int?>("RacunId")
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("RacunId1");
+                    b.HasIndex("RacunId")
+                        .IsUnique();
 
                     b.ToTable("Korisnici");
                 });
@@ -81,7 +80,6 @@ namespace WebTemplate.Migrations
                         .HasColumnType("numeric");
 
                     b.Property<string>("Valuta")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("Id");
@@ -135,15 +133,12 @@ namespace WebTemplate.Migrations
                         .HasColumnType("integer");
 
                     b.Property<string>("Svrha")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("TekuciReceiver")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("TekuciSender")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("Tip")
@@ -160,8 +155,9 @@ namespace WebTemplate.Migrations
             modelBuilder.Entity("WebTemplate.Models.Korisnik", b =>
                 {
                     b.HasOne("WebTemplate.Models.Racun", "Racun")
-                        .WithMany()
-                        .HasForeignKey("RacunId1");
+                        .WithOne("Korisnik")
+                        .HasForeignKey("WebTemplate.Models.Korisnik", "RacunId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.Navigation("Racun");
                 });
@@ -193,6 +189,8 @@ namespace WebTemplate.Migrations
 
             modelBuilder.Entity("WebTemplate.Models.Racun", b =>
                 {
+                    b.Navigation("Korisnik");
+
                     b.Navigation("Transakcije");
                 });
 #pragma warning restore 612, 618

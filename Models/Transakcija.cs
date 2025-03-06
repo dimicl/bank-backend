@@ -16,6 +16,9 @@ namespace WebTemplate.Models
         public string? TekuciSender { get; set; }
         public string? TekuciReceiver { get; set;}
         public string? Svrha { get; set; }
+
+        [ForeignKey("Racun")]
+        public int RacunId { get; set; } 
       
         [JsonIgnore]
         public Racun? Racun { get; set; }
