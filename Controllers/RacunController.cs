@@ -68,7 +68,7 @@ public class RacunController : ControllerBase
 
     
     
- [HttpPut]
+[HttpPut]
 [Route("transfer")]
 public async Task<ActionResult> transferNovca([FromBody] TransferRequest request)
 {
@@ -86,12 +86,6 @@ public async Task<ActionResult> transferNovca([FromBody] TransferRequest request
         if (sender.Racun?.Sredstva <= 0 || sender.Racun?.Sredstva < request.Iznos)
             return BadRequest("Nemate dovoljno sredstava za transfer");
 
-        if (sender.Racun?.Transakcije == null)
-            sender.Racun.Transakcije = new List<Transakcija>();
-
-        if (receiver.Racun?.Transakcije == null)
-            receiver.Racun.Transakcije = new List<Transakcija>();
-
         sender.Racun.Sredstva -= request.Iznos;
         receiver.Racun.Sredstva += request.Iznos;
 
@@ -103,10 +97,8 @@ public async Task<ActionResult> transferNovca([FromBody] TransferRequest request
             TekuciSender = sender.Racun?.BrojRacuna,
             TekuciReceiver = receiver.Racun?.BrojRacuna,
             Svrha = request.Svrha,
-            Racun = sender.Racun 
+            RacunId = sender.Racun.Id  
         };
-
-        sender.Racun.Transakcije.Add(transakcijaSender);
 
         var transakcijaReceiver = new Transakcija
         {
@@ -116,16 +108,14 @@ public async Task<ActionResult> transferNovca([FromBody] TransferRequest request
             TekuciSender = sender.Racun?.BrojRacuna,
             TekuciReceiver = receiver.Racun?.BrojRacuna,
             Svrha = request.Svrha,
-            Racun = receiver.Racun 
+            RacunId = receiver.Racun.Id  
         };
 
-        receiver.Racun.Transakcije.Add(transakcijaReceiver);
+        await Context.Transakcije.AddAsync(transakcijaSender);
+        await Context.Transakcije.AddAsync(transakcijaReceiver);
 
-        Context.Transakcije.Add(transakcijaSender);
-        Context.Transakcije.Add(transakcijaReceiver);
-
-        Context.Korisnici.Update(sender);  
-        Context.Korisnici.Update(receiver); 
+        Context.Racuni.Update(sender.Racun);
+        Context.Racuni.Update(receiver.Racun);
 
         await Context.SaveChangesAsync();
 
@@ -133,9 +123,10 @@ public async Task<ActionResult> transferNovca([FromBody] TransferRequest request
     }
     catch (Exception e)
     {
-        return BadRequest("Greska: " + e.Message);
+        return BadRequest("Greska: " + e.Message + " | Inner: " + e.InnerException?.Message);
     }
 }
+
 
 
 
