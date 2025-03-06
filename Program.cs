@@ -3,7 +3,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Dodavanje DbContext-a sa konekcijskim stringom
 builder.Services.AddDbContext<BankaContext>(options =>
 {
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
 
 // Konfiguracija CORS-a
