@@ -11,8 +11,6 @@ namespace WebTemplate.Models
         [EmailAddress]
         public string? Email { get; set; }
 
-        [MaxLength(13)] [MinLength(13)]
-        public int? RacunId { get; set; }
         public Racun? Racun {get; set;}
 
          [MaxLength(4)]

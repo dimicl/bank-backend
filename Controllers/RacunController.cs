@@ -51,7 +51,7 @@ public class RacunController : ControllerBase
             {
                 Iznos = request.Iznos,
                 Tip = "Uplata",
-                Datum = DateTime.Now,
+                Datum = DateTime.UtcNow,
                 Racun = user.Racun
             };
             
